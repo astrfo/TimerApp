@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Time;
 
 /**
  * TimerApp
@@ -36,14 +35,14 @@ public class TimerApp extends JFrame implements ActionListener {
         resetButton.addActionListener(this);
         add(resetButton);
 
-        timeLabel = new JLabel("残り時間：");
+        timeLabel = new JLabel("残り時間： 0秒");
         add(timeLabel);
 
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 remainingTime--;
-                timeLabel.setText("残り時間： " + remainingTime);
+                timeLabel.setText("残り時間： " + remainingTime + "秒");
                 if(remainingTime == 0) {
                     timer.stop();
                     JOptionPane.showMessageDialog(null, "タイマー終了");
@@ -55,7 +54,16 @@ public class TimerApp extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        ;
+        if(e.getSource() == startButton) {
+            remainingTime = Integer.parseInt(timeField.getText());
+            timer.start();
+        } else if(e.getSource() == pauseButton) {
+            timer.stop();
+        } else if(e.getSource() == resetButton) {
+            timer.stop();
+            remainingTime = 0;
+            timeLabel.setText("残り時間： 0秒");
+        }
     }
 
     public static void main(String[] args) {
