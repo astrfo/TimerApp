@@ -18,24 +18,31 @@ public class TimerApp extends JFrame implements ActionListener {
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        setLayout(new GridLayout(4, 1));
+        setLayout(new GridLayout(5, 1));
 
         timeField = new JTextField();
+        timeField.setHorizontalAlignment(JTextField.CENTER);
+        timeField.setFont(new Font("Arial", Font.PLAIN, 40));
         add(timeField);
 
         startButton = new JButton("START");
+        startButton.setFont(new Font("Arial", Font.PLAIN, 20));
         startButton.addActionListener(this);
         add(startButton);
 
         pauseButton = new JButton("PAUSE");
+        pauseButton.setFont(new Font("Arial", Font.PLAIN, 20));
         pauseButton.addActionListener(this);
         add(pauseButton);
 
         resetButton = new JButton("RESET");
+        resetButton.setFont(new Font("Arial", Font.PLAIN, 20));
         resetButton.addActionListener(this);
         add(resetButton);
 
         timeLabel = new JLabel("残り時間： 0秒");
+        timeLabel.setHorizontalAlignment(JLabel.CENTER);
+        timeLabel.setFont(new Font("Arial", Font.PLAIN, 30));
         add(timeLabel);
 
         timer = new Timer(1000, new ActionListener() {
