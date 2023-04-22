@@ -1,8 +1,7 @@
 import javax.swing.*;
-import javax.xml.stream.events.StartElement;
-
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Time;
 
 /**
  * TimerApp
@@ -11,6 +10,8 @@ public class TimerApp extends JFrame implements ActionListener {
     private JTextField timeField;
     private JButton startButton, pauseButton, resetButton;
     private JLabel timeLabel;
+    private Timer timer;
+    private int remainingTime;
 
     //コンストラクタ(Pythonで言うと__init__)
     public TimerApp() {
@@ -37,6 +38,18 @@ public class TimerApp extends JFrame implements ActionListener {
 
         timeLabel = new JLabel("残り時間：");
         add(timeLabel);
+
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                remainingTime--;
+                timeLabel.setText("残り時間： " + remainingTime);
+                if(remainingTime == 0) {
+                    timer.stop();
+                    JOptionPane.showMessageDialog(null, "タイマー終了");
+                }
+            }
+        });
 
         setVisible(true);
     }
